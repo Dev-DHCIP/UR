@@ -1,0 +1,2396 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAMRI Human Capital Intelligence Platform - User Requirements</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff9a00;
+            --secondary-color: #1a3a6c;
+            --accent-color: #0072c6;
+            --light-color: #f1faee;
+            --dark-color: #1d3557;
+            --white-color: #ffffff;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+        
+        .container {
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        
+        /* Header Styles - Updated for scroll behavior */
+        .header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease-in-out;
+            transform: translateY(0);
+        }
+        
+        .header.hidden {
+            transform: translateY(-100%);
+            box-shadow: none;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-right: 20px;
+        }
+        
+        .title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            color: #ddd;
+        }
+        
+        /* Mobile Header Adjustments */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 0;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .logo-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .title {
+                font-size: 1.5rem;
+            }
+            
+            .subtitle {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Document Styles - Adjusted for fixed header */
+        .document-container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            margin-top: 150px; /* Increased to accommodate fixed header */
+        }
+        
+        /* Responsive padding adjustments */
+        @media (max-width: 768px) {
+            .document-container {
+                padding: 20px 15px;
+                margin-top: 130px; /* Adjusted for mobile */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .document-container {
+                padding: 15px 10px;
+                margin-top: 110px; /* Adjusted for small screens */
+            }
+        }
+        
+        .document-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .document-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .document-subtitle {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        /* Mobile Document Header Adjustments */
+        @media (max-width: 768px) {
+            .document-header {
+                margin-bottom: 30px;
+                padding-bottom: 15px;
+            }
+            
+            .document-title {
+                font-size: 1.8rem;
+            }
+            
+            .document-subtitle {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .document-header {
+                margin-bottom: 25px;
+                padding-bottom: 10px;
+            }
+            
+            .document-title {
+                font-size: 1.5rem;
+            }
+            
+            .document-subtitle {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Section Styles */
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-left: 4px solid var(--primary-color);
+            background-color: #fff;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        /* Mobile Section Adjustments */
+        @media (max-width: 768px) {
+            .section {
+                margin-bottom: 30px;
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .section {
+                margin-bottom: 25px;
+                padding: 12px;
+                border-radius: 8px;
+            }
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        /* Mobile Section Title Adjustments */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+                padding-bottom: 8px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.2rem;
+                margin-bottom: 12px;
+                padding-bottom: 6px;
+            }
+        }
+        
+        .subsection {
+            margin-bottom: 25px;
+        }
+        
+        /* Mobile Subsection Adjustments */
+        @media (max-width: 768px) {
+            .subsection {
+                margin-bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .subsection {
+                margin-bottom: 15px;
+            }
+        }
+        
+        .subsection-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+        
+        /* Mobile Subsection Title Adjustments */
+        @media (max-width: 768px) {
+            .subsection-title {
+                font-size: 1.2rem;
+                margin-bottom: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .subsection-title {
+                font-size: 1.1rem;
+                margin-bottom: 10px;
+            }
+        }
+        
+        /* User Story Card Styles */
+        .user-story-card {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        /* Mobile User Story Card Adjustments */
+        @media (max-width: 768px) {
+            .user-story-card {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .user-story-card {
+                padding: 12px;
+                margin-bottom: 12px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        .user-story-id {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        /* Mobile User Story ID Adjustments */
+        @media (max-width: 768px) {
+            .user-story-id {
+                font-size: 1rem;
+                margin-bottom: 4px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .user-story-id {
+                font-size: 0.95rem;
+                margin-bottom: 3px;
+            }
+        }
+        
+        .user-story-role {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+        
+        .user-story-need {
+            font-style: italic;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        .user-story-benefit {
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .priority-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-right: 10px;
+        }
+        
+        .priority-high {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        
+        .priority-medium {
+            background-color: #fff8e1;
+            color: #ff8f00;
+        }
+        
+        .priority-low {
+            background-color: #e8f5e8;
+            color: #2e7d32;
+        }
+        
+        /* Acceptance Criteria Styles */
+        .acceptance-criteria {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .acceptance-title {
+            font-weight: 600;
+            color: #1565c0;
+            margin-bottom: 10px;
+        }
+        
+        .acceptance-item {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .acceptance-item:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #1565c0;
+            font-weight: bold;
+        }
+        
+        /* Table Styles */
+        .table-custom {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 0.95rem;
+        }
+        
+        .table-custom th {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .table-custom td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+        
+        .table-custom tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .table-custom tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        /* Responsive Table Styles */
+        @media (max-width: 768px) {
+            .table-custom {
+                font-size: 0.9rem;
+            }
+            
+            .table-custom th,
+            .table-custom td {
+                padding: 8px 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .table-custom {
+                font-size: 0.85rem;
+            }
+            
+            .table-custom th,
+            .table-custom td {
+                padding: 6px 8px;
+            }
+            
+            /* Stack table on small screens */
+            .table-responsive {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .table-custom {
+                min-width: 600px;
+            }
+        }
+        
+        /* Use Case Diagram Placeholder */
+        .diagram-placeholder {
+            background-color: #f5f5f5;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 40px 20px;
+            text-align: center;
+            margin: 30px 0;
+            color: #666;
+        }
+        
+        /* Mobile Diagram Placeholder Adjustments */
+        @media (max-width: 768px) {
+            .diagram-placeholder {
+                padding: 30px 15px;
+                margin: 25px 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .diagram-placeholder {
+                padding: 25px 10px;
+                margin: 20px 0;
+                font-size: 0.95rem;
+            }
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        /* Mobile Footer Adjustments */
+        @media (max-width: 768px) {
+            .footer {
+                padding: 25px 15px;
+                margin-top: 30px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .footer {
+                padding: 20px 10px;
+                margin-top: 25px;
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+                font-size: 12pt;
+            }
+            
+            .header, .no-print {
+                display: none;
+            }
+            
+            .document-container {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                padding: 20px;
+                margin-top: 20px;
+            }
+            
+            .section {
+                border-left: 4px solid var(--primary-color);
+                page-break-inside: avoid;
+            }
+            
+            /* Ensure tables fit on printed page */
+            .table-custom {
+                font-size: 10pt;
+            }
+            
+            .table-custom th,
+            .table-custom td {
+                padding: 6px 8px;
+            }
+        }
+        
+        /* Button Styles */
+        .btn-print {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .btn-print:hover {
+            background-color: #e68a00;
+            transform: translateY(-2px);
+        }
+        
+        /* Mobile Button Adjustments */
+        @media (max-width: 768px) {
+            .btn-print {
+                padding: 10px 20px;
+                margin-bottom: 15px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .btn-print {
+                padding: 8px 16px;
+                margin-bottom: 12px;
+                font-size: 0.9rem;
+                width: 100%;
+            }
+        }
+        
+        /* Navigation for Mobile */
+        .mobile-nav {
+            display: none;
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .mobile-nav.hidden {
+            transform: translateY(-100%);
+            box-shadow: none;
+        }
+        
+        .mobile-nav select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-nav {
+                display: block;
+            }
+        }
+        
+        /* Content Typography */
+        p, li {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            p, li {
+                font-size: 0.95rem;
+                margin-bottom: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            p, li {
+                font-size: 0.9rem;
+                margin-bottom: 10px;
+            }
+        }
+        
+        /* Heading Typography */
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        
+        @media (max-width: 768px) {
+            h1, h2, h3, h4, h5, h6 {
+                margin-top: 1.3em;
+                margin-bottom: 0.4em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1, h2, h3, h4, h5, h6 {
+                margin-top: 1.2em;
+                margin-bottom: 0.3em;
+            }
+        }
+        
+        /* Image Responsive */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Horizontal Scrolling for Tables on Mobile */
+        @media (max-width: 768px) {
+            .table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin: 15px 0;
+            }
+        }
+        
+        /* Collapsible Sections for Mobile */
+        .collapsible-section {
+            cursor: pointer;
+        }
+        
+        .collapsible-content {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .collapsible-section {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 15px;
+                background-color: var(--secondary-color);
+                color: white;
+                border-radius: 8px;
+                margin-bottom: 15px;
+            }
+            
+            .collapsible-content {
+                display: none;
+                padding: 15px;
+                border: 1px solid #ddd;
+                border-radius: 0 0 8px 8px;
+            }
+            
+            .collapsible-content.active {
+                display: block;
+            }
+        }
+        
+        /* Floating Action Button for Mobile Navigation */
+        .fab {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .fab.hidden {
+            transform: translateY(100px);
+            opacity: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .fab {
+                display: flex;
+            }
+        }
+        
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .scroll-to-top.hidden {
+            transform: translateY(100px);
+            opacity: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .scroll-to-top {
+                display: flex;
+            }
+        }
+        
+        /* User Persona Styles */
+        .persona-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .persona-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .persona-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin-right: 20px;
+        }
+        
+        .persona-info h3 {
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+        
+        .persona-info p {
+            margin: 0;
+            color: #666;
+        }
+        
+        .persona-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .persona-detail-item {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .persona-detail-title {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+        
+        /* Mobile Persona Adjustments */
+        @media (max-width: 768px) {
+            .persona-card {
+                padding: 15px;
+                margin-bottom: 25px;
+            }
+            
+            .persona-header {
+                flex-direction: column;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+            
+            .persona-avatar {
+                margin-right: 0;
+                margin-bottom: 15px;
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .persona-details {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .persona-detail-item {
+                padding: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .persona-card {
+                padding: 12px;
+                margin-bottom: 20px;
+            }
+            
+            .persona-avatar {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .persona-detail-item {
+                padding: 10px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="mainHeader">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="https://placehold.co/120x40/1a3a6c/ffffff?text=DAMRI" alt="DAMRI Logo" class="logo">
+                    <div>
+                        <h1 class="title">DAMRI HUMAN CAPITAL INTELLIGENCE PLATFORM</h1>
+                        <p class="subtitle">User Requirements Document</p>
+                    </div>
+                </div>
+                <div class="text-end">
+                    <p class="mb-1"><strong>Document Version:</strong> 1.0</p>
+                    <p class="mb-1"><strong>Date:</strong> October 26, 2023</p>
+                    <p><strong>Status:</strong> Approved</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNavContainer">
+        <select id="mobileNav" class="form-select">
+            <option value="">Navigate to Section...</option>
+            <option value="#introduction">1. Introduction</option>
+            <option value="#user-personas">2. User Personas</option>
+            <option value="#user-stories">3. User Stories</option>
+            <option value="#use-cases">4. Use Cases</option>
+            <option value="#functional-requirements">5. Functional Requirements</option>
+            <option value="#non-functional-requirements">6. Non-Functional Requirements</option>
+            <option value="#acceptance-criteria">7. Acceptance Criteria</option>
+            <option value="#prioritization">8. Prioritization</option>
+            <option value="#validation">9. Validation & Verification</option>
+        </select>
+    </div>
+
+    <div class="container">
+        <button class="btn-print">
+            <i class="fas fa-print me-2"></i>Print Document
+        </button>
+        
+        <div class="document-container">
+            <div class="document-header">
+                <h1 class="document-title">USER REQUIREMENTS DOCUMENT</h1>
+                <h2 class="document-subtitle">DAMRI Human Capital Intelligence Platform</h2>
+            </div>
+
+            <!-- Table of Contents -->
+            <div class="section">
+                <h2 class="section-title">Table of Contents</h2>
+                <ol>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#user-personas">User Personas</a></li>
+                    <li><a href="#user-stories">User Stories</a></li>
+                    <li><a href="#use-cases">Use Cases</a></li>
+                    <li><a href="#functional-requirements">Functional Requirements</a></li>
+                    <li><a href="#non-functional-requirements">Non-Functional Requirements</a></li>
+                    <li><a href="#acceptance-criteria">Acceptance Criteria</a></li>
+                    <li><a href="#prioritization">Prioritization</a></li>
+                    <li><a href="#validation">Validation & Verification</a></li>
+                </ol>
+            </div>
+
+            <!-- 1. Introduction -->
+            <div class="section" id="introduction">
+                <h2 class="section-title">1. Introduction</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">1.1 Purpose</h3>
+                    <p>This User Requirements Document (URD) describes the requirements for the DAMRI Human Capital Intelligence Platform from the perspective of end users. It captures what users need to accomplish with the system, rather than how the system will implement those needs.</p>
+                    <p>The purpose of this document is to ensure that the system being developed meets the actual needs of DAMRI's HR personnel, managers, and executives in managing and developing talent across the organization.</p>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">1.2 Scope</h3>
+                    <p>The DAMRI Human Capital Intelligence Platform will serve the following user groups with their specific needs:</p>
+                    <ul>
+                        <li><strong>HR Administrators:</strong> Manage employee data, generate reports, handle day-to-day HR operations</li>
+                        <li><strong>Department Managers:</strong> Monitor team performance, make promotion/rotation decisions, identify training needs</li>
+                        <li><strong>Executive Leadership:</strong> Make strategic decisions about workforce planning, talent management, and organizational development</li>
+                        <li><strong>Employees:</strong> View their own performance data, training recommendations, and career development paths</li>
+                    </ul>
+                    <p>The system will focus on providing data-driven insights for talent management decisions, with emphasis on employee rotation, mutation, training suitability, and performance improvement.</p>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">1.3 Definitions</h3>
+                    <div class="table-wrapper">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>Term</th>
+                                    <th>Definition</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>User Requirement</td>
+                                    <td>A statement of what the system must do from the user's perspective to solve a business problem</td>
+                                </tr>
+                                <tr>
+                                    <td>User Story</td>
+                                    <td>A simple description of a feature from the perspective of the person who desires the new capability</td>
+                                </tr>
+                                <tr>
+                                    <td>Use Case</td>
+                                    <td>A description of how users will perform tasks on the system</td>
+                                </tr>
+                                <tr>
+                                    <td>Acceptance Criteria</td>
+                                    <td>Conditions that a software product must satisfy to be accepted by a user or customer</td>
+                                </tr>
+                                <tr>
+                                    <td>KPI</td>
+                                    <td>Key Performance Indicator - A measurable value that demonstrates how effectively an employee is achieving key objectives</td>
+                                </tr>
+                                <tr>
+                                    <td>DSS</td>
+                                    <td>Decision Support System - A computerized program used to support determinations and decision-making activities</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">1.4 Document Overview</h3>
+                    <p>This document is organized as follows:</p>
+                    <ul>
+                        <li>Section 2 describes the user personas who will interact with the system</li>
+                        <li>Section 3 presents user stories capturing specific user needs</li>
+                        <li>Section 4 outlines use cases describing how users will interact with the system</li>
+                        <li>Section 5 details functional requirements derived from user needs</li>
+                        <li>Section 6 outlines non-functional requirements important to users</li>
+                        <li>Section 7 defines acceptance criteria for validating user requirements</li>
+                        <li>Section 8 prioritizes requirements based on user value and business impact</li>
+                        <li>Section 9 describes how requirements will be validated and verified</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2. User Personas -->
+            <div class="section" id="user-personas">
+                <h2 class="section-title">2. User Personas</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">2.1 HR Administrator</h3>
+                    <div class="persona-card">
+                        <div class="persona-header">
+                            <div class="persona-avatar">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="persona-info">
+                                <h3>Siti Rahayu - HR Administrator</h3>
+                                <p>35 years old, works at DAMRI HQ in Jakarta</p>
+                            </div>
+                        </div>
+                        <div class="persona-details">
+                            <div class="persona-detail-item">
+                                <div class="persona-detail-title">Goals</div>
+                                <p>Maintain accurate employee records, generate HR reports efficiently, support managers with data for decision making</p>
+                            </div>
+                            <div class="persona-detail-item">
+                                <div class="persona-detail-title">Frustrations</div>
+                                <p>Manual data entry errors, difficulty consolidating data from multiple systems, time-consuming report generation</p>
+                            </div>
+                            <div class="persona-detail-item">
+                                <div class="persona-detail-title">Technical Proficiency</div>
+                                <p>Comfortable with HR systems, intermediate Excel skills, learns new systems quickly</p>
+                            </div>
+                            <div class="persona-detail-item">
+                                <div class="persona-detail-title">Needs from System</div>
+                                <p>Centralized employee database, automated reporting, easy data export, audit trail for changes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">2.2 Department Manager</h3>
+                    <div class="persona-card">
+                        <div class="persona-header">
+                            <div class="persona-avatar">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div class="persona-info">
+                                <h3>Ahmad Fauzi - Operations Manager</h3>
+                                <p>42 years old, manages operations in Bandung branch</p>
+                            </div>
+                        </div>
+                        <div class="persona-details">
+                            <div class="persona-detail-item">
+                                <div class="persona-detail-title">Goals</div>
+                                <p>Improve team performance, identify high-potential employees, make informed promotion/rotation decisions</p>
+                            </div>
+                            <div class="persona-detail-item">
+                                <div class="persona-detail-title">Frustrations</div>
+                                <p>Lack of comprehensive performance data, difficulty identifying training needs, subjective decision making</p>
+                            </div>
+                            <div class="persona-detail-item">
+                                <div class="persona-detail-title">Technical Proficiency</div>
+                                <p>Comfortable with dashboards and analytics, prefers visual data representation, limited time for system learning</p>
+                            </div>
+                            <div class="persona-detail-item">
+                                <div class="persona-detail-title">Needs from System</div>
+                                <p>Performance dashboards, talent identification tools, training recommendations, decision support for rotations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">2.3 Executive Leadership</h3>
+                    <div class="persona-card">
+                        <div class="persona-header">
+                            <div class="persona-avatar">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="persona-info">
+                                <h3>Dewi Lestari - HR Director</h3>
+                                <p>48 years old, oversees HR strategy for all DAMRI branches</p>
+                            </div>
+                        </div>
+                        <div class="persona-details">
+                            <div class="persona-detail-item">
+                                <div class="persona-detail-title">Goals</div>
+                                <p>Develop talent pipeline, optimize workforce allocation, ensure succession planning, improve overall organizational performance</p>
+                            </div>
+                            <div class="persona-detail-item">
+                                <div class="persona-detail-title">Frustrations</div>
+                                <p>Lack of strategic insights from operational data, difficulty identifying organization-wide trends, reactive rather than proactive talent management</p>
+                            </div>
+                            <div class="persona-detail-item">
+                                <div class="persona-detail-title">Technical Proficiency</div>
+                                <p>Prefers high-level summaries and visualizations, limited patience for complex interfaces, relies on assistants for detailed analysis</p>
+                            </div>
+                            <div class="persona-detail-item">
+                                <div class="persona-detail-title">Needs from System</div>
+                                <p>Strategic dashboards, organization-wide talent analytics, predictive insights, executive summaries, exportable presentations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">2.4 Employee</h3>
+                    <div class="persona-card">
+                        <div class="persona-header">
+                            <div class="persona-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="persona-info">
+                                <h3>Budi Santoso - Maintenance Technician</h3>
+                                <p>28 years old, works at Surabaya branch</p>
+                            </div>
+                        </div>
+                        <div class="persona-details">
+                            <div class="persona-detail-item">
+                                <div class="persona-detail-title">Goals</div>
+                                <p>Understand performance expectations, identify career development opportunities, access relevant training, improve skills</p>
+                            </div>
+                            <div class="persona-detail-item">
+                                <div class="persona-detail-title">Frustrations</div>
+                                <p>Unclear performance criteria, limited visibility into career paths, difficulty accessing relevant training opportunities</p>
+                            </div>
+                            <div class="persona-detail-item">
+                                <div class="persona-detail-title">Technical Proficiency</div>
+                                <p>Basic computer skills, uses smartphone for most digital interactions, prefers simple, intuitive interfaces</p>
+                            </div>
+                            <div class="persona-detail-item">
+                                <div class="persona-detail-title">Needs from System</div>
+                                <p>Personal performance dashboard, career development recommendations, training suggestions, clear performance goals</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. User Stories -->
+            <div class="section" id="user-stories">
+                <h2 class="section-title">3. User Stories</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">3.1 Employee Data Management</h3>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-001: View Employee Profile</div>
+                        <div class="user-story-role">As an HR Administrator,</div>
+                        <div class="user-story-need">I want to view comprehensive employee profiles</div>
+                        <div class="user-story-benefit">so that I can access all relevant employee information in one place.</div>
+                        <span class="priority-badge priority-high">High Priority</span>
+                    </div>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-002: Add New Employee</div>
+                        <div class="user-story-role">As an HR Administrator,</div>
+                        <div class="user-story-need">I want to add new employee records with all required information</div>
+                        <div class="user-story-benefit">so that new hires are properly onboarded into the system.</div>
+                        <span class="priority-badge priority-high">High Priority</span>
+                    </div>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-003: Update Employee Information</div>
+                        <div class="user-story-role">As an HR Administrator,</div>
+                        <div class="user-story-need">I want to update employee information (position, department, salary, etc.)</div>
+                        <div class="user-story-benefit">so that employee records remain current and accurate.</div>
+                        <span class="priority-badge priority-high">High Priority</span>
+                    </div>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-004: Record Employee Cases</div>
+                        <div class="user-story-role">As an HR Administrator,</div>
+                        <div class="user-story-need">I want to record employee achievements and warnings</div>
+                        <div class="user-story-benefit">so that complete performance history is maintained for decision making.</div>
+                        <span class="priority-badge priority-high">High Priority</span>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">3.2 Performance Management</h3>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-005: View KPI Dashboard</div>
+                        <div class="user-story-role">As a Department Manager,</div>
+                        <div class="user-story-need">I want to view a dashboard of my team's KPI scores</div>
+                        <div class="user-story-benefit">so that I can quickly assess overall team performance.</div>
+                        <span class="priority-badge priority-high">High Priority</span>
+                    </div>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-006: Input Supervisor Evaluation</div>
+                        <div class="user-story-role">As a Department Manager,</div>
+                        <div class="user-story-need">I want to input evaluation scores and comments for my team members</div>
+                        <div class="user-story-benefit">so that performance assessments are documented and factored into KPI calculations.</div>
+                        <span class="priority-badge priority-high">High Priority</span>
+                    </div>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-007: View Individual Performance Details</div>
+                        <div class="user-story-role">As a Department Manager,</div>
+                        <div class="user-story-need">I want to view detailed performance breakdowns for individual employees</div>
+                        <div class="user-story-benefit">so that I can understand strengths and areas for improvement.</div>
+                        <span class="priority-badge priority-high">High Priority</span>
+                    </div>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-008: Compare Employee Performance</div>
+                        <div class="user-story-role">As a Department Manager,</div>
+                        <div class="user-story-need">I want to compare performance metrics across employees in my department</div>
+                        <div class="user-story-benefit">so that I can identify top performers and those needing support.</div>
+                        <span class="priority-badge priority-medium">Medium Priority</span>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">3.3 Training and Development</h3>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-009: View Training Recommendations</div>
+                        <div class="user-story-role">As a Department Manager,</div>
+                        <div class="user-story-need">I want to view personalized training recommendations for my team members</div>
+                        <div class="user-story-benefit">so that I can support their professional development.</div>
+                        <span class="priority-badge priority-high">High Priority</span>
+                    </div>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-010: Assess Training Suitability</div>
+                        <div class="user-story-role">As a Department Manager,</div>
+                        <div class="user-story-need">I want to see confidence levels for training recommendations</div>
+                        <div class="user-story-benefit">so that I can make informed decisions about training investments.</div>
+                        <span class="priority-badge priority-medium">Medium Priority</span>
+                    </div>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-011: Track Training Completion</div>
+                        <div class="user-story-role">As an HR Administrator,</div>
+                        <div class="user-story-need">I want to track completion of training programs and certifications</div>
+                        <div class="user-story-benefit">so that compliance and development goals are met.</div>
+                        <span class="priority-badge priority-high">High Priority</span>
+                    </div>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-012: View Personal Development Plan</div>
+                        <div class="user-story-role">As an Employee,</div>
+                        <div class="user-story-need">I want to view my personalized development plan with recommended training</div>
+                        <div class="user-story-benefit">so that I can take ownership of my career growth.</div>
+                        <span class="priority-badge priority-medium">Medium Priority</span>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">3.4 Decision Support</h3>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-013: Get Rotation Recommendations</div>
+                        <div class="user-story-role">As a Department Manager,</div>
+                        <div class="user-story-need">I want to receive data-driven recommendations for employee rotations</div>
+                        <div class="user-story-benefit">so that I can optimize talent utilization and avoid misplacement.</div>
+                        <span class="priority-badge priority-high">High Priority</span>
+                    </div>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-014: Identify Promotion Candidates</div>
+                        <div class="user-story-role">As a Department Manager,</div>
+                        <div class="user-story-need">I want to identify employees who are eligible and ready for promotion</div>
+                        <div class="user-story-benefit">so that I can plan for succession and recognize high performers.</div>
+                        <span class="priority-badge priority-high">High Priority</span>
+                    </div>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-015: View Bonus Eligibility</div>
+                        <div class="user-story-role">As an HR Administrator,</div>
+                        <div class="user-story-need">I want to view which employees are eligible for bonuses based on performance</div>
+                        <div class="user-story-benefit">so that bonus calculations are accurate and fair.</div>
+                        <span class="priority-badge priority-high">High Priority</span>
+                    </div>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-016: Analyze Talent Pipeline</div>
+                        <div class="user-story-role">As an Executive,</div>
+                        <div class="user-story-need">I want to analyze the organization-wide talent pipeline</div>
+                        <div class="user-story-benefit">so that I can make strategic decisions about workforce planning.</div>
+                        <span class="priority-badge priority-high">High Priority</span>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">3.5 Reporting and Analytics</h3>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-017: Generate Standard Reports</div>
+                        <div class="user-story-role">As an HR Administrator,</div>
+                        <div class="user-story-need">I want to generate standard HR reports (attendance, performance, training)</div>
+                        <div class="user-story-benefit">so that I can provide regular updates to management.</div>
+                        <span class="priority-badge priority-high">High Priority</span>
+                    </div>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-018: Create Custom Reports</div>
+                        <div class="user-story-role">As an HR Administrator,</div>
+                        <div class="user-story-need">I want to create custom reports with selected parameters</div>
+                        <div class="user-story-benefit">so that I can respond to specific information requests.</div>
+                        <span class="priority-badge priority-medium">Medium Priority</span>
+                    </div>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-019: View Department Performance</div>
+                        <div class="user-story-role">As an Executive,</div>
+                        <div class="user-story-need">I want to view performance comparisons across departments</div>
+                        <div class="user-story-benefit">so that I can identify high-performing and underperforming units.</div>
+                        <span class="priority-badge priority-high">High Priority</span>
+                    </div>
+                    
+                    <div class="user-story-card">
+                        <div class="user-story-id">US-020: Export Data for Presentation</div>
+                        <div class="user-story-role">As an Executive,</div>
+                        <div class="user-story-need">I want to export data and visualizations for presentations</div>
+                        <div class="user-story-benefit">so that I can communicate insights to stakeholders.</div>
+                        <span class="priority-badge priority-medium">Medium Priority</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Use Cases -->
+            <div class="section" id="use-cases">
+                <h2 class="section-title">4. Use Cases</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">4.1 Use Case: Manage Employee Data</h3>
+                    <div class="table-wrapper">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>Attribute</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Use Case ID</strong></td>
+                                    <td>UC-001</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Name</strong></td>
+                                    <td>Manage Employee Data</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Actor</strong></td>
+                                    <td>HR Administrator</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Description</strong></td>
+                                    <td>HR Administrator adds, views, updates, and deletes employee records in the system.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Preconditions</strong></td>
+                                    <td>User is logged in with HR Administrator privileges.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Basic Flow</strong></td>
+                                    <td>
+                                        <ol>
+                                            <li>HR Administrator navigates to Employee Management section</li>
+                                            <li>System displays list of employees with search/filter options</li>
+                                            <li>HR Administrator selects an action (Add, View, Edit, Delete)</li>
+                                            <li>For Add/Edit: System displays form with required fields</li>
+                                            <li>HR Administrator completes form and submits</li>
+                                            <li>System validates data and saves record</li>
+                                            <li>System confirms successful operation</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Alternative Flows</strong></td>
+                                    <td>
+                                        <ul>
+                                            <li>A1: Invalid data entered - System displays error messages and highlights required corrections</li>
+                                            <li>A2: Duplicate employee ID - System prevents saving and alerts user</li>
+                                            <li>A3: Delete confirmation - System requires confirmation before deleting record</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Postconditions</strong></td>
+                                    <td>Employee data is accurately updated in the system with audit trail.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">4.2 Use Case: Evaluate Employee Performance</h3>
+                    <div class="table-wrapper">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>Attribute</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Use Case ID</strong></td>
+                                    <td>UC-002</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Name</strong></td>
+                                    <td>Evaluate Employee Performance</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Actor</strong></td>
+                                    <td>Department Manager</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Description</strong></td>
+                                    <td>Department Manager evaluates team members' performance by inputting scores and comments.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Preconditions</strong></td>
+                                    <td>User is logged in with Department Manager privileges and has employees assigned to their department.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Basic Flow</strong></td>
+                                    <td>
+                                        <ol>
+                                            <li>Department Manager navigates to Performance Evaluation section</li>
+                                            <li>System displays list of team members with evaluation status</li>
+                                            <li>Department Manager selects an employee to evaluate</li>
+                                            <li>System displays evaluation form with rating scales and comment fields</li>
+                                            <li>Department Manager inputs scores for each competency and adds comments</li>
+                                            <li>Department Manager submits evaluation</li>
+                                            <li>System calculates updated KPI score and saves evaluation</li>
+                                            <li>System confirms successful submission</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Alternative Flows</strong></td>
+                                    <td>
+                                        <ul>
+                                            <li>A1: Incomplete evaluation - System prevents submission until all required fields are completed</li>
+                                            <li>A2: Save as draft - Department Manager can save evaluation as draft to complete later</li>
+                                            <li>A3: Review previous evaluations - Department Manager can view historical evaluations for context</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Postconditions</strong></td>
+                                    <td>Employee evaluation is recorded and KPI score is updated. Employee and HR are notified.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">4.3 Use Case: Generate Training Recommendations</h3>
+                    <div class="table-wrapper">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>Attribute</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Use Case ID</strong></td>
+                                    <td>UC-003</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Name</strong></td>
+                                    <td>Generate Training Recommendations</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Actor</strong></td>
+                                    <td>Department Manager, HR Administrator</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Description</strong></td>
+                                    <td>System analyzes employee data to generate personalized training recommendations with confidence levels.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Preconditions</strong></td>
+                                    <td>Employee performance data is available in the system.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Basic Flow</strong></td>
+                                    <td>
+                                        <ol>
+                                            <li>User navigates to Training Recommendations section</li>
+                                            <li>User selects an employee or group of employees</li>
+                                            <li>System analyzes employee data (performance, competencies, career goals)</li>
+                                            <li>System generates list of recommended training programs with confidence levels</li>
+                                            <li>System displays recommendations with rationale for each</li>
+                                            <li>User can export or assign recommendations</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Alternative Flows</strong></td>
+                                    <td>
+                                        <ul>
+                                            <li>A1: Insufficient data - System indicates low confidence level and suggests additional data collection</li>
+                                            <li>A2: Filter recommendations - User can filter by training type, duration, or cost</li>
+                                            <li>A3: Manual override - User can modify or add custom recommendations</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Postconditions</strong></td>
+                                    <td>Training recommendations are generated and available for review and assignment.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">4.4 Use Case: Make Rotation Decisions</h3>
+                    <div class="table-wrapper">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>Attribute</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Use Case ID</strong></td>
+                                    <td>UC-004</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Name</strong></td>
+                                    <td>Make Rotation Decisions</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Actor</strong></td>
+                                    <td>Department Manager, HR Administrator</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Description</strong></td>
+                                    <td>System provides data-driven recommendations for employee rotations to optimize talent utilization.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Preconditions</strong></td>
+                                    <td>Employee performance and competency data is available in the system.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Basic Flow</strong></td>
+                                    <td>
+                                        <ol>
+                                            <li>User navigates to Rotation Recommendations section</li>
+                                            <li>User selects criteria (department, position, skills needed)</li>
+                                            <li>System analyzes employee profiles against criteria</li>
+                                            <li>System generates list of recommended employees for rotation with suitability scores</li>
+                                            <li>System displays detailed rationale for each recommendation</li>
+                                            <li>User reviews recommendations and makes final decision</li>
+                                            <li>User documents decision and implementation plan</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Alternative Flows</strong></td>
+                                    <td>
+                                        <ul>
+                                            <li>A1: No suitable candidates - System indicates no good matches and suggests development plan</li>
+                                            <li>A2: Compare multiple candidates - User can compare profiles side-by-side</li>
+                                            <li>A3: Simulate impact - System shows potential impact of rotation on both departments</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Postconditions</strong></td>
+                                    <td>Rotation decisions are documented with rationale. Affected employees and departments are notified.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Functional Requirements -->
+            <div class="section" id="functional-requirements">
+                <h2 class="section-title">5. Functional Requirements</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">5.1 Employee Data Management Requirements</h3>
+                    <div class="table-wrapper">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Requirement</th>
+                                    <th>Source (User Story)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>FR-001</td>
+                                    <td>The system shall allow HR Administrators to create, view, edit, and delete employee profiles containing personal information, position, department, salary scale, and employment history.</td>
+                                    <td>US-001, US-002, US-003</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-002</td>
+                                    <td>The system shall track and display employee attendance metrics including attendance rate, number of late arrivals, and number of absences.</td>
+                                    <td>US-001, US-017</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-003</td>
+                                    <td>The system shall maintain a record of employee cases including achievements, warnings (SP), and other notable events with dates and descriptions.</td>
+                                    <td>US-004, US-001</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-004</td>
+                                    <td>The system shall allow searching and filtering of employee records by multiple criteria (name, department, position, KPI range, etc.).</td>
+                                    <td>US-001, US-007</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">5.2 Performance Management Requirements</h3>
+                    <div class="table-wrapper">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Requirement</th>
+                                    <th>Source (User Story)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>FR-005</td>
+                                    <td>The system shall calculate an overall KPI score for each employee based on attendance, supervisor evaluation, behavioral competencies, technical competencies, training completion, and branch performance.</td>
+                                    <td>US-005, US-007</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-006</td>
+                                    <td>The system shall allow supervisors to input evaluation scores (1-5 scale) and comments for their team members.</td>
+                                    <td>US-006</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-007</td>
+                                    <td>The system shall assess and track both behavioral and technical competencies for each employee with scores and category breakdowns.</td>
+                                    <td>US-007, US-008</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-008</td>
+                                    <td>The system shall provide visual dashboards showing performance trends, comparisons, and distributions.</td>
+                                    <td>US-005, US-019</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">5.3 Training and Development Requirements</h3>
+                    <div class="table-wrapper">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Requirement</th>
+                                    <th>Source (User Story)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>FR-009</td>
+                                    <td>The system shall track completed and in-progress training for each employee, including certifications earned.</td>
+                                    <td>US-011</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-010</td>
+                                    <td>The system shall analyze employee data to determine suitability for specific training programs with confidence levels.</td>
+                                    <td>US-010</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-011</td>
+                                    <td>The system shall generate personalized training recommendations based on employee performance, competencies, and career development needs.</td>
+                                    <td>US-009, US-012</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-012</td>
+                                    <td>The system shall allow assignment of training programs to employees and tracking of completion status.</td>
+                                    <td>US-009, US-011</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">5.4 Decision Support Requirements</h3>
+                    <div class="table-wrapper">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Requirement</th>
+                                    <th>Source (User Story)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>FR-013</td>
+                                    <td>The system shall provide data-driven recommendations for employee rotation to avoid misplacement based on historical performance, skills, and position requirements.</td>
+                                    <td>US-013</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-014</td>
+                                    <td>The system shall determine and display promotion eligibility based on KPI scores, tenure, competencies, and achievement records.</td>
+                                    <td>US-014</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-015</td>
+                                    <td>The system shall calculate and display bonus eligibility based on performance metrics and company policies.</td>
+                                    <td>US-015</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-016</td>
+                                    <td>The system shall provide what-if analysis capabilities for talent decisions (rotation, promotion, training investment).</td>
+                                    <td>US-013, US-014</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">5.5 Reporting and Analytics Requirements</h3>
+                    <div class="table-wrapper">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Requirement</th>
+                                    <th>Source (User Story)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>FR-017</td>
+                                    <td>The system shall provide interactive dashboards displaying key metrics including total employees, average KPI, promotion-ready employees, and employees needing improvement.</td>
+                                    <td>US-005, US-019</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-018</td>
+                                    <td>The system shall analyze and compare performance across departments with visualizations and rankings.</td>
+                                    <td>US-019</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-019</td>
+                                    <td>The system shall display the distribution of employee performance across defined ranges (Excellent, Good, Average, Needs Improvement).</td>
+                                    <td>US-005, US-008</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-020</td>
+                                    <td>The system shall allow users to generate custom reports with selected parameters and export them in PDF and Excel formats.</td>
+                                    <td>US-017, US-018, US-020</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Non-Functional Requirements -->
+            <div class="section" id="non-functional-requirements">
+                <h2 class="section-title">6. Non-Functional Requirements</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">6.1 Usability Requirements</h3>
+                    <div class="table-wrapper">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Requirement</th>
+                                    <th>Rationale</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>NFR-001</td>
+                                    <td>The system shall have an intuitive interface that requires minimal training for users to perform their primary tasks.</td>
+                                    <td>Users have varying levels of technical proficiency and limited time for system training.</td>
+                                </tr>
+                                <tr>
+                                    <td>NFR-002</td>
+                                    <td>The system shall provide contextual help and tooltips for complex features and terminology.</td>
+                                    <td>To assist users in understanding system functionality and HR terminology.</td>
+                                </tr>
+                                <tr>
+                                    <td>NFR-003</td>
+                                    <td>The system shall be responsive and usable on desktop, tablet, and mobile devices.</td>
+                                    <td>Users need to access the system from various devices and locations.</td>
+                                </tr>
+                                <tr>
+                                    <td>NFR-004</td>
+                                    <td>The system shall use consistent navigation, layout, and interaction patterns throughout the application.</td>
+                                    <td>To reduce cognitive load and improve user efficiency.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">6.2 Performance Requirements</h3>
+                    <div class="table-wrapper">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Requirement</th>
+                                    <th>Rationale</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>NFR-005</td>
+                                    <td>The system shall load dashboard pages within 5 seconds for up to 100 concurrent users.</td>
+                                    <td>Users need quick access to information for timely decision making.</td>
+                                </tr>
+                                <tr>
+                                    <td>NFR-006</td>
+                                    <td>The system shall respond to search and filter operations within 2 seconds.</td>
+                                    <td>To maintain user productivity during data exploration.</td>
+                                </tr>
+                                <tr>
+                                    <td>NFR-007</td>
+                                    <td>The system shall generate standard reports within 30 seconds for datasets up to 10,000 records.</td>
+                                    <td>To meet user expectations for report generation timeliness.</td>
+                                </tr>
+                                <tr>
+                                    <td>NFR-008</td>
+                                    <td>The system shall support up to 500 concurrent users during peak hours.</td>
+                                    <td>To accommodate all potential users across DAMRI branches.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">6.3 Reliability Requirements</h3>
+                    <div class="table-wrapper">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Requirement</th>
+                                    <th>Rationale</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>NFR-009</td>
+                                    <td>The system shall be available 99.5% of the time during business hours (7am-7pm).</td>
+                                    <td>HR processes are critical to daily operations and cannot tolerate significant downtime.</td>
+                                </tr>
+                                <tr>
+                                    <td>NFR-010</td>
+                                    <td>The system shall automatically save user work in progress to prevent data loss.</td>
+                                    <td>To protect against accidental data loss due to system errors or user mistakes.</td>
+                                </tr>
+                                <tr>
+                                    <td>NFR-011</td>
+                                    <td>The system shall provide meaningful error messages that guide users toward resolution.</td>
+                                    <td>To help users recover from errors without requiring technical support.</td>
+                                </tr>
+                                <tr>
+                                    <td>NFR-012</td>
+                                    <td>The system shall maintain an audit trail of all data modifications for accountability.</td>
+                                    <td>To ensure data integrity and compliance with HR policies.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">6.4 Security Requirements</h3>
+                    <div class="table-wrapper">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Requirement</th>
+                                    <th>Rationale</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>NFR-013</td>
+                                    <td>The system shall implement role-based access control to ensure users can only access data and functionality appropriate to their role.</td>
+                                    <td>To protect sensitive employee information and ensure proper authorization.</td>
+                                </tr>
+                                <tr>
+                                    <td>NFR-014</td>
+                                    <td>The system shall encrypt all sensitive personal data both at rest and in transit.</td>
+                                    <td>To comply with data protection regulations and protect employee privacy.</td>
+                                </tr>
+                                <tr>
+                                    <td>NFR-015</td>
+                                    <td>The system shall require strong passwords and implement account lockout after 5 failed login attempts.</td>
+                                    <td>To prevent unauthorized access to the system.</td>
+                                </tr>
+                                <tr>
+                                    <td>NFR-016</td>
+                                    <td>The system shall allow HR Administrators to control data access permissions for managers.</td>
+                                    <td>To ensure managers only access data for their own team members.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Acceptance Criteria -->
+            <div class="section" id="acceptance-criteria">
+                <h2 class="section-title">7. Acceptance Criteria</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">7.1 Employee Data Management</h3>
+                    <div class="acceptance-criteria">
+                        <div class="acceptance-title">Acceptance Criteria for Employee Data Management:</div>
+                        <div class="acceptance-item">HR Administrator can successfully add a new employee with all required fields (name, employee ID, department, position, salary scale).</div>
+                        <div class="acceptance-item">System prevents saving employee record if required fields are missing or invalid.</div>
+                        <div class="acceptance-item">HR Administrator can search for employees by name, ID, department, or position and get accurate results.</div>
+                        <div class="acceptance-item">HR Administrator can update employee information and see changes reflected immediately.</div>
+                        <div class="acceptance-item">System requires confirmation before deleting an employee record and maintains audit trail of deletions.</div>
+                        <div class="acceptance-item">Employee case records (achievements and warnings) are properly linked to employee profiles and displayed in chronological order.</div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">7.2 Performance Management</h3>
+                    <div class="acceptance-criteria">
+                        <div class="acceptance-title">Acceptance Criteria for Performance Management:</div>
+                        <div class="acceptance-item">Department Manager can input evaluation scores (1-5) for all required competencies and add comments.</div>
+                        <div class="acceptance-item">System calculates overall KPI score using the defined formula and displays it prominently on employee profile.</div>
+                        <div class="acceptance-item">KPI dashboard shows accurate summary statistics (total employees, average KPI, etc.) for the manager's department.</div>
+                        <div class="acceptance-item">Performance trends are displayed visually with charts showing improvement or decline over time.</div>
+                        <div class="acceptance-item">System allows comparison of employees side-by-side on key performance metrics.</div>
+                        <div class="acceptance-item">Employees can view their own performance data and KPI score (with appropriate permissions).</div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">7.3 Training and Development</h3>
+                    <div class="acceptance-criteria">
+                        <div class="acceptance-title">Acceptance Criteria for Training and Development:</div>
+                        <div class="acceptance-item">System generates personalized training recommendations for each employee based on their performance gaps and career goals.</div>
+                        <div class="acceptance-item">Training recommendations include confidence levels (High/Medium/Low) with explanations for the rating.</div>
+                        <div class="acceptance-item">Department Manager can assign recommended training to employees and track completion status.</div>
+                        <div class="acceptance-item">System updates employee profiles with completed training and certifications.</div>
+                        <div class="acceptance-item">Employees can view their assigned training and development plan in their personal dashboard.</div>
+                        <div class="acceptance-item">HR Administrator can generate reports showing training completion rates by department or employee group.</div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">7.4 Decision Support</h3>
+                    <div class="acceptance-criteria">
+                        <div class="acceptance-title">Acceptance Criteria for Decision Support:</div>
+                        <div class="acceptance-item">System provides rotation recommendations with suitability scores and detailed rationale based on skills and performance data.</div>
+                        <div class="acceptance-item">Promotion eligibility is clearly indicated with criteria met/not met for each requirement.</div>
+                        <div class="acceptance-item">Bonus eligibility is calculated according to company policy and displayed with explanation of calculation.</div>
+                        <div class="acceptance-item">Decision support recommendations include "what-if" scenarios showing potential impact of decisions.</div>
+                        <div class="acceptance-item">System indicates when data is insufficient for high-confidence recommendations and suggests additional data collection.</div>
+                        <div class="acceptance-item">All recommendations can be exported or shared with other stakeholders for collaborative decision making.</div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">7.5 Reporting and Analytics</h3>
+                    <div class="acceptance-criteria">
+                        <div class="acceptance-title">Acceptance Criteria for Reporting and Analytics:</div>
+                        <div class="acceptance-item">Dashboards load within 5 seconds and display accurate, up-to-date information.</div>
+                        <div class="acceptance-item">Standard reports can be generated with one click and exported in PDF and Excel formats.</div>
+                        <div class="acceptance-item">Custom reports allow selection of specific data fields, filters, and date ranges.</div>
+                        <div class="acceptance-item">Visualizations (charts, graphs) accurately represent data and are easy to interpret.</div>
+                        <div class="acceptance-item">Department performance comparisons show meaningful metrics and allow drilling down to individual employee data.</div>
+                        <div class="acceptance-item">Executive dashboards provide high-level summaries with ability to drill down for more detail.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. Prioritization -->
+            <div class="section" id="prioritization">
+                <h2 class="section-title">8. Prioritization</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">8.1 Prioritization Methodology</h3>
+                    <p>Requirements have been prioritized using the MoSCoW method:</p>
+                    <ul>
+                        <li><strong>MUST have:</strong> Critical requirements without which the system cannot function or meet basic user needs</li>
+                        <li><strong>SHOULD have:</strong> Important requirements that add significant value but are not critical for initial release</li>
+                        <li><strong>COULD have:</strong> Desirable requirements that can be included if time and resources permit</li>
+                        <li><strong>WON'T have:</strong> Requirements that have been agreed to be excluded from current release</li>
+                    </p>
+                    <div class="table-wrapper">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>Priority</th>
+                                    <th>Criteria</th>
+                                    <th>User Impact</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>MUST</strong></td>
+                                    <td>Critical for core functionality, legal/regulatory requirement, high user value</td>
+                                    <td>High - System cannot be used without these features</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>SHOULD</strong></td>
+                                    <td>Important for user satisfaction, significant business value, enhances core functionality</td>
+                                    <td>Medium-High - System can function but with reduced effectiveness</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>COULD</strong></td>
+                                    <td>Nice to have, low implementation effort, minor enhancement</td>
+                                    <td>Low-Medium - System fully functional without these features</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>WON'T</strong></td>
+                                    <td>Out of scope, low value, high implementation effort, can be deferred</td>
+                                    <td>Low - No impact on core system functionality</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">8.2 Prioritized Requirements</h3>
+                    <div class="table-wrapper">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Requirement</th>
+                                    <th>Priority</th>
+                                    <th>Rationale</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>FR-001</td>
+                                    <td>Employee Profile Management</td>
+                                    <td>MUST</td>
+                                    <td>Core functionality - system cannot function without employee data</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-005</td>
+                                    <td>KPI Calculation</td>
+                                    <td>MUST</td>
+                                    <td>Core purpose of system - all decision support depends on accurate KPI</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-006</td>
+                                    <td>Supervisor Evaluation Input</td>
+                                    <td>MUST</td>
+                                    <td>Essential component of KPI calculation and performance management</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-017</td>
+                                    <td>Dashboard Visualization</td>
+                                    <td>MUST</td>
+                                    <td>Primary interface for users to access system insights and information</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-013</td>
+                                    <td>Rotation Recommendations</td>
+                                    <td>SHOULD</td>
+                                    <td>Key decision support feature but can be enhanced in later releases</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-014</td>
+                                    <td>Promotion Eligibility</td>
+                                    <td>SHOULD</td>
+                                    <td>Important decision support feature for managers and HR</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-011</td>
+                                    <td>Training Recommendations</td>
+                                    <td>SHOULD</td>
+                                    <td>Important for employee development but can use simpler algorithm initially</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-020</td>
+                                    <td>Custom Report Generation</td>
+                                    <td>COULD</td>
+                                    <td>Valuable but standard reports may suffice for initial release</td>
+                                </tr>
+                                <tr>
+                                    <td>FR-016</td>
+                                    <td>What-if Analysis</td>
+                                    <td>COULD</td>
+                                    <td>Advanced feature that can be added after core functionality is stable</td>
+                                </tr>
+                                <tr>
+                                    <td>NFR-003</td>
+                                    <td>Mobile Responsiveness</td>
+                                    <td>SHOULD</td>
+                                    <td>Important for accessibility but desktop use may be primary initially</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. Validation & Verification -->
+            <div class="section" id="validation">
+                <h2 class="section-title">9. Validation & Verification</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">9.1 Validation Approach</h3>
+                    <p>Validation ensures that we are building the right product - that the system meets user needs and business requirements.</p>
+                    <ul>
+                        <li><strong>User Acceptance Testing (UAT):</strong> Key users from each persona group will test the system against real-world scenarios</li>
+                        <li><strong>Prototype Reviews:</strong> Early prototypes will be reviewed with stakeholders to validate requirements</li>
+                        <li><strong>Usability Testing:</strong> Representative users will perform tasks while observers note difficulties and successes</li>
+                        <li><strong>Demo Sessions:</strong> Regular demonstrations to stakeholders throughout development to ensure alignment</li>
+                        <li><strong>Feedback Loops:</strong> Structured feedback collection from users during pilot implementation</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">9.2 Verification Approach</h3>
+                    <p>Verification ensures that we are building the product right - that the system is implemented according to specifications.</p>
+                    <ul>
+                        <li><strong>Requirements Traceability:</strong> Each requirement is traced from origin through design, implementation, and testing</li>
+                        <li><strong>Test Case Development:</strong> Test cases are developed for each requirement to verify correct implementation</li>
+                        <li><strong>Automated Testing:</strong> Automated tests for core functionality to ensure consistency across releases</li>
+                        <li><strong>Code Reviews:</strong> Peer reviews of code to ensure quality and adherence to standards</li>
+                        <li><strong>Performance Testing:</strong> Load and stress testing to verify system meets performance requirements</li>
+                        <li><strong>Security Testing:</strong> Vulnerability scanning and penetration testing to verify security requirements</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">9.3 Validation Criteria</h3>
+                    <p>The system will be considered validated when:</p>
+                    <div class="acceptance-criteria">
+                        <div class="acceptance-item">All MUST have requirements have been implemented and verified</div>
+                        <div class="acceptance-item">Key users from each persona group confirm that the system meets their core needs</div>
+                        <div class="acceptance-item">Users can successfully complete their primary tasks with minimal training</div>
+                        <div class="acceptance-item">System performance meets or exceeds defined requirements under expected load</div>
+                        <div class="acceptance-item">All critical defects have been resolved and remaining defects are documented and prioritized</div>
+                        <div class="acceptance-item">Stakeholders formally accept the system for production use</div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">9.4 Sign-off Process</h3>
+                    <p>Formal sign-off will be obtained from:</p>
+                    <div class="table-wrapper">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>Role</th>
+                                    <th>Responsibility</th>
+                                    <th>Sign-off Criteria</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>HR Director</td>
+                                    <td>Overall business owner</td>
+                                    <td>Confirms system meets strategic HR objectives and business needs</td>
+                                </tr>
+                                <tr>
+                                    <td>IT Director</td>
+                                    <td>Technical owner</td>
+                                    <td>Confirms system meets technical requirements and integration needs</td>
+                                </tr>
+                                <tr>
+                                    <td>HR Operations Manager</td>
+                                    <td>Primary user representative</td>
+                                    <td>Confirms system meets day-to-day operational needs of HR team</td>
+                                </tr>
+                                <tr>
+                                    <td>Department Head Representative</td>
+                                    <td>Manager user representative</td>
+                                    <td>Confirms system meets needs of department managers for performance management</td>
+                                </tr>
+                                <tr>
+                                    <td>Compliance Officer</td>
+                                    <td>Regulatory compliance</td>
+                                    <td>Confirms system meets data protection and regulatory requirements</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p><strong>DAMRI Human Capital Intelligence Platform - User Requirements Document</strong></p>
+                <p>© 2023 DAMRI. All rights reserved.</p>
+                <p>Confidential and Proprietary - For Internal Use Only</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Buttons for Mobile -->
+    <div class="fab" id="menuFab">
+        <i class="fas fa-bars"></i>
+    </div>
+    
+    <div class="scroll-to-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Add smooth scrolling for navigation links and header hide on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            let lastScrollTop = 0;
+            const header = document.getElementById('mainHeader');
+            const mobileNav = document.getElementById('mobileNavContainer');
+            const menuFab = document.getElementById('menuFab');
+            const scrollTopBtn = document.getElementById('scrollTop');
+            
+            // Hide header on scroll down, show on scroll up
+            window.addEventListener('scroll', function() {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // Hide/show header based on scroll direction
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    // Scrolling down
+                    header.classList.add('hidden');
+                    if (mobileNav) mobileNav.classList.add('hidden');
+                    if (menuFab) menuFab.classList.add('hidden');
+                    if (scrollTopBtn) scrollTopBtn.classList.add('hidden');
+                } else {
+                    // Scrolling up
+                    header.classList.remove('hidden');
+                    if (mobileNav) mobileNav.classList.remove('hidden');
+                    if (menuFab) menuFab.classList.remove('hidden');
+                    if (scrollTopBtn) scrollTopBtn.classList.remove('hidden');
+                }
+                
+                lastScrollTop = scrollTop;
+                
+                // Show scroll to top button when scrolled down
+                if (scrollTopBtn) {
+                    if (scrollTop > 300) {
+                        scrollTopBtn.classList.remove('hidden');
+                    } else {
+                        scrollTopBtn.classList.add('hidden');
+                    }
+                }
+            });
+            
+            // Mobile navigation
+            const mobileNavSelect = document.getElementById('mobileNav');
+            if (mobileNavSelect) {
+                mobileNavSelect.addEventListener('change', function() {
+                    if (this.value) {
+                        const targetElement = document.querySelector(this.value);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 120,
+                                behavior: 'smooth'
+                            });
+                            this.value = ''; // Reset select
+                        }
+                    }
+                });
+            }
+            
+            // Navigation links
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 120,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Scroll to top button
+            if (scrollTopBtn) {
+                scrollTopBtn.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            
+            // Menu FAB for mobile
+            if (menuFab) {
+                menuFab.addEventListener('click', function() {
+                    if (mobileNavSelect) {
+                        mobileNavSelect.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            }
+            
+            // Make sections collapsible on mobile
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                const title = section.querySelector('.section-title');
+                if (title && window.innerWidth <= 768) {
+                    const collapsibleSection = document.createElement('div');
+                    collapsibleSection.className = 'collapsible-section';
+                    collapsibleSection.innerHTML = `
+                        <span>${title.textContent}</span>
+                        <i class="fas fa-chevron-down"></i>
+                    `;
+                    
+                    // Insert collapsible section before the original section
+                    section.parentNode.insertBefore(collapsibleSection, section);
+                    
+                    // Hide the original section initially
+                    section.classList.add('collapsible-content');
+                    
+                    // Add click event to toggle
+                    collapsibleSection.addEventListener('click', function() {
+                        section.classList.toggle('active');
+                        const icon = collapsibleSection.querySelector('i');
+                        if (section.classList.contains('active')) {
+                            icon.classList.remove('fa-chevron-down');
+                            icon.classList.add('fa-chevron-up');
+                        } else {
+                            icon.classList.remove('fa-chevron-up');
+                            icon.classList.add('fa-chevron-down');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
